@@ -1,0 +1,9 @@
+{% extends 'base_main.html' %}
+
+{% load static %}
+{% block ext_js %}
+    {{  block.super }}
+    <script type="text/javascript" src=" {% static 'js/swiper.min.js' %}"></script>
+
+
+{% endblock  %}
