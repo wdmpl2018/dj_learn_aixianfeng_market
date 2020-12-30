@@ -14,7 +14,7 @@
 {% block content %}
         <div id ="market">
             <aside>
-                <ul>
+                <ul>market
                     {% for foodtype in foodtypes %}
                         <li>
                             <a href="{% url 'axf:market_with_params'  typeid=foodtype.typeid childcid=0 order_rule=0%}"> {{foodtype.typename}}</a>
@@ -55,9 +55,9 @@
                                         </div>
                                     </a>
                                     <section>
-                                        <button>-</button>
+                                        <button class="subShopping">－</button>
                                         <span>0</span>
-                                        <button>+</button>
+                                        <button goodsid="{{goods.id}}" class="addShopping">＋</button>
                                     </section>
                                 </li>
                             {% endfor %}

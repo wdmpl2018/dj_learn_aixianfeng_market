@@ -91,3 +91,51 @@ class Goods(models.Model):
 
     class Meta:
         db_table = 'axf_goods'
+
+
+class AXFUser(models.Model):
+    u_username = models.CharField(max_length=32, unique=True)
+    u_password = models.CharField(max_length=256)
+    u_email = models.CharField(max_length=64, unique=True)
+    u_icon = models.ImageField(upload_to='icons/%Y/%m/%d/')
+    is_active = models.BooleanField(default=False)
+    is_delete = models.BooleanField(default=False)
+
+    class Meta:
+        db_table = 'axf_user'
+
+class Cart(models.Model):
+
+    c_user = models.ForeignKey(AXFUser)
+    c_goods = models.ForeignKey(Goods)
+
+    c_goods_num = models.IntegerField(default=1)
+    c_is_select =  models.BooleanField(default=True)
+    
+    class Meta:
+        db_table  = 'axf_cart'
+
+
+class Order(models.Model):
+     ##ORDER_STATUS
+    ORDER_STATUS_NOT_PAY = 1   #已下单未付款
+    ORDER_STATUS_NOT_SEND = 2   #已下单未付款
+    ORDER_STATUS_NOT_RECEIVE = 3   #已下单未付款
+
+    o_user = models.ForeignKey(AXFUser)
+    o_price = models.FloatField(default=0)
+    o_time = models.DateTimeField(auto_now=True)
+    o_status = models.IntegerField(default=ORDER_STATUS_NOT_PAY)
+
+    class Meta:
+        db_table = 'axf_order'
+
+
+class OrderGoods(models.Model):   
+
+    o_order = models.ForeignKey(Order)
+    o_goods = models.ForeignKey(Goods)
+    o_good_num = models.IntegerField(default=1)
+
+    class Meta:
+        db_table = 'axf_ordergoods'
